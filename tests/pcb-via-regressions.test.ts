@@ -8,7 +8,7 @@ for (const fixture of viaRegressionCases) {
     { type: "source_net", source_net_id: "gnd", name: "GND" },
     ...fixture.elements,
   ]
-  test.failing(`${fixture.name}: preserves native via`, async () => {
+  test(`${fixture.name}: preserves native via`, async () => {
     const { pcb } = await extractArchive(elements)
     const vias = pcb.getRecordsByKind("Via")
     expect(vias).toHaveLength(1)
@@ -18,7 +18,7 @@ for (const fixture of viaRegressionCases) {
   })
 }
 
-test.failing("normalizes layer spans, supports legacy endpoints, and declares via-only nets", async () => {
+test("normalizes layer spans, supports legacy endpoints, and declares via-only nets", async () => {
   const { pcb } = await extractArchive([
     board({ num_layers: 4 }),
     {
@@ -43,7 +43,7 @@ test.failing("normalizes layer spans, supports legacy endpoints, and declares vi
   expect(pcb.getNetForRecord(vias[1]!)).toBeUndefined()
 })
 
-test.failing("deduplicates inline vias by connection and span while retaining explicit dimensions", async () => {
+test("deduplicates inline vias by connection and span while retaining explicit dimensions", async () => {
   const { pcb } = await extractArchive([
     board({ num_layers: 4 }),
     {
@@ -117,7 +117,7 @@ test.failing("deduplicates inline vias by connection and span while retaining ex
   )
 })
 
-test.failing("infers legacy inline layer transitions from neighboring wires", async () => {
+test("infers legacy inline layer transitions from neighboring wires", async () => {
   const { pcb } = await extractArchive([
     board({ num_layers: 4 }),
     {
