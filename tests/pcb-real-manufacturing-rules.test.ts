@@ -11,7 +11,7 @@ async function scenario() {
   }
 }
 
-test.failing("preserves manufacturing width and clearance settings already present on the real board", async () => {
+test("preserves manufacturing width and clearance settings already present on the real board", async () => {
   const { pcb, board } = await scenario()
   const width = pcb.rules.find(
     (rule) => rule.get("NAME") === "TscircuitMinTraceWidth",
@@ -51,10 +51,10 @@ test("records the real board's exported manufacturing minima", async () => {
     ruleCount: pcb.rules.length,
   }).toMatchInlineSnapshot(`
     {
-      "boardEdgeGapMm": null,
-      "minimumTraceWidthMm": null,
-      "ruleCount": 0,
-      "traceToPadGapMm": null,
+      "boardEdgeGapMm": 0.2,
+      "minimumTraceWidthMm": 0.1,
+      "ruleCount": 8,
+      "traceToPadGapMm": 0.1,
     }
   `)
 }, 30_000)
